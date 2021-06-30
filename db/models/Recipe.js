@@ -8,10 +8,17 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
   });
-  SequelizeSlugify.slugifyModel(Recipe, { source: ['name'] });
   Recipe.associate = (models) => {
-    // models.Shop.hasMany(Product, { foreignKey: 'shopId', as: 'products' });
-    // Product.belongsTo(models.Shop, { foreignKey: 'shopId' });
+    Recipe.belongsToMany(models.Ingredient, {
+      through: models.RecipeIngredients,
+      as: 'ingredients',
+      foreignKey: 'recipeId',
+    });
+    models.Ingredient.belongsToMany(Recipe, {
+      through: models.RecipeIngredients,
+      as: 'recipes',
+      foreignKey: 'ingredientId',
+    });
   };
   return Recipe;
 };

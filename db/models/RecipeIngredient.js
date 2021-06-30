@@ -1,15 +1,8 @@
-const Cuisine = require('./Cuisine');
 const Recipe = require('./Recipe');
+const Ingredient = require('./Ingredient');
 
 module.exports = (sequelize, DataTypes) => {
-  const CuisineRecipes = sequelize.define('CuisineRecipes', {
-    cuisineId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Cuisine,
-        key: 'id',
-      },
-    },
+  const RecipeIngredients = sequelize.define('RecipeIngredients', {
     recipeId: {
       type: DataTypes.INTEGER,
       references: {
@@ -17,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
+    ingredientId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Ingredient,
+        key: 'id',
+      },
+    },
   });
-  return CuisineRecipes;
+  return RecipeIngredients;
 };

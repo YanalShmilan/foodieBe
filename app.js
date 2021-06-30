@@ -3,6 +3,8 @@ const path = require('path');
 const cors = require('cors');
 const cuisinesRoutes = require('./routes/cuisines');
 const recipesRoutes = require('./routes/recipes');
+const ingCatRoutes = require('./routes/ingCat');
+const ingredientsRoutes = require('./routes/ingredients');
 
 const app = express();
 
@@ -10,6 +12,8 @@ app.use(express.json());
 app.use(cors());
 app.use('/cuisines', cuisinesRoutes);
 app.use('/recipes', recipesRoutes);
+app.use('/ingcat', ingCatRoutes);
+app.use('/ingredients', ingredientsRoutes);
 
 app.use('/media', express.static(path.join(__dirname, 'media')));
 app.use((req, res, next) => {
